@@ -13,7 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="智能考勤系统"
+        android:text="@string/login_activity_title"
         android:textSize="50dp"
         android:textColor="#ffffff"
         android:layout_marginTop="100dp"/>
@@ -22,21 +22,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/bg_edittext"
         android:layout_marginTop="480dp"
-        android:background="#ffffff"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="请输入用户名"/>
+        android:hint="@string/login_activity_username_hint"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        />
     <EditText
         android:id="@+id/et_userPassword"
         app:layout_constraintTop_toBottomOf="@id/et_userName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
-        android:background="#ffffff"
+        android:background="@drawable/bg_edittext"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="请输入密码"/>
+        android:hint="@string/login_activity_pwd_hint"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        />
     <Button
         android:id="@+id/bt_confirm"
         android:layout_width="150dp"
@@ -53,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/bt_confirm"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tv_forgotPwd"
-        android:text="立即注册"
+        android:text="@string/login_activity_text_singIn"
         android:textColor="#ffffff"
         android:layout_marginTop="30dp" />
     <TextView
@@ -63,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/bt_confirm"
         app:layout_constraintLeft_toRightOf="@id/tv_signIn"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="找回密码"
+        android:text="@string/login_activity_forgot_pwd"
         android:textColor="#ffffff"
         android:layout_marginTop="30dp" />
 
