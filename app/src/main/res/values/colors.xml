@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#006666</color>
+    <color name="colorPrimaryDark">#0DABA0</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="color_background">#ace6e6</color>
+
+    <color name="my_color_1">#B0DAF1</color>
+    <color name="my_color_2">#008c9e</color>
+    <color name="my_color_3">#005f6b</color>
+    <color name="my_color_4">#343838</color>
+
+
+    <color name="smssdk_green">#08979C</color>
+    <color name="smssdk_white_line">#14ffffff</color>
+    <color name="smssdk_hint_textcolor">#7fffffff</color>
+    <color name="smssdk_text_green">#099A9F</color>
+
+    <color name="BlueToolbar">#B0DAF1</color>
+    <color name="BlueTab">#2874A6</color>
+
+    <color name="RedTab">#A60C0C</color>
+    <color name="RedToolbar">#D5373C</color>
+
 </resources>

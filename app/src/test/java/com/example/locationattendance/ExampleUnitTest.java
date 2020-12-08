@@ -1,5 +1,8 @@
 package com.example.locationattendance;
 
+import com.example.locationattendance.data.Group;
+import com.example.locationattendance.data.GroupDao;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,6 +15,9 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        Group group = new Group("63437552","Computer","gaolong");
+        GroupDao dao = new GroupDao();
+        dao.addGroup(group);
+        assertEquals(4,2+2);
     }
 }

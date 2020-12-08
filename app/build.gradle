@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    useLibrary 'org.apache.http.legacy'
+    ndkVersion '21.3.6528147' //引入ndk版本
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -23,6 +25,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+//调用MobTech SDK
+apply plugin: 'com.mob.sdk'
+MobSDK {
+    appKey "31290f523d4f8"
+    appSecret "9facdb1573c1a5dd9efa279f7aca401c"
+
+    SMSSDK {}
+
+    // 调用MobPush
+    //MobPush {
+        //严格模式,需要用户同意相关协议
+        //fp true
+    //}
 }
 
 dependencies {
@@ -31,10 +54,30 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation files('libs\\mysql-connector-java-5.1.49.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
+    /*navigation*/
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha04"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha04"
+
+    /*Bmob*/
+    implementation 'cn.bmob.android:bmob-sdk:3.7.8'
+    implementation "io.reactivex.rxjava2:rxjava:2.2.8"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.1'
+    implementation 'com.squareup.okio:okio:2.2.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    /*单元测试所需要的依赖*/
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.19.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
+
+    /*flyco viewpager相关*/
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 }
