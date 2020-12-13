@@ -1,10 +1,10 @@
 package com.example.locationattendance.chat;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,7 +19,7 @@ import android.widget.EditText;
 import com.example.locationattendance.R;
 import com.example.locationattendance.data.Group;
 import com.example.locationattendance.data.UserConstants;
-import com.example.locationattendance.utils.DateUtils;
+import com.example.locationattendance.sign.SendSignActivity;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -71,20 +71,13 @@ public class ChatActivity extends AppCompatActivity {
         currentGroup = group;//设置当前群组
         //初始化文字输入栏
         initEditText();
-        //初始化消息列表内容
-        initMsgList();
-        Log.d(TAG,msgList.size()+"");
-//        for(MsgBean msgBean:msgList){
-//            Log.d(TAG,msgBean.getName());
-//        }
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         chat_recyclerView.setLayoutManager(layoutManager);
         chatRvAdapter=new ChatRvAdapter(msgList);
         chat_recyclerView.setAdapter(chatRvAdapter);
         Log.d(TAG,chatRvAdapter.getItemCount()+"");
-
+        initMsgList();
         //connectService();
         //log2Service();
 
@@ -111,7 +104,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
     /**
-     * 与服务器连接
+     * 与服务器连接(弃用)
      */
     public void connectService(){
         new Thread(new Runnable() {
@@ -181,6 +174,12 @@ public class ChatActivity extends AppCompatActivity {
         sendMsg_et.addTextChangedListener(textWatch);//输入内容时右侧按钮变化
     }
 
+    @OnClick(R.id.bt_sendOther)
+    public void onClickOther(){
+        Intent intent = new Intent(ChatActivity.this, SendSignActivity.class);
+        startActivity(intent);
+    }
+
     /**
      * 发送消息
      */
@@ -209,6 +208,7 @@ public class ChatActivity extends AppCompatActivity {
                     OutputStream outputStream = socket.getOutputStream();
                     outputStream.write((strMsgBean).getBytes("utf-8"));
                     outputStream.flush();
+                    sendMsg_et.setText("");//发送后清空消息
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -270,7 +270,6 @@ public class ChatActivity extends AppCompatActivity {
         }
         @Override
         public void afterTextChanged(Editable s) {
-
             //s:变化后的所有字符
             if(s.toString().equals("")){
                 sendOtherBt.setVisibility(View.VISIBLE);
