@@ -22,8 +22,7 @@ import butterknife.BindView;
 
 public class SendSignActivity extends AppCompatActivity {
 
-    @BindView(R.id.send_sign_map)
-    MapView sMapView;
+    MapView sMapView=null;
     @BindView(R.id.send_sign_currentEt)
     EditText s_current_Et;
 
@@ -37,6 +36,8 @@ public class SendSignActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seed_sign);
+        initView();
+        initLocation();
     }
     @Override
     protected void onStart() {
@@ -64,7 +65,7 @@ public class SendSignActivity extends AppCompatActivity {
     }
 
     public void initView(){
-
+        sMapView = findViewById(R.id.send_sign_map);
         //去除logo
         sMapView.removeViewAt(1);
         //百度地图
@@ -101,12 +102,12 @@ public class SendSignActivity extends AppCompatActivity {
             location.getBuildingID();    //室内精准定位下，获取楼宇ID
             location.getBuildingName();    //室内精准定位下，获取楼宇名称
             location.getFloor();    //室内精准定位下，获取当前位置所处的楼层信息
-            Log.d("Main","纬度："+location.getLatitude());
-            Log.d("Main","经度："+location.getLongitude());
+            Log.d("SendSign","发送纬度："+location.getLatitude());
+            Log.d("SendSign","发送经度："+location.getLongitude());
             int errorCode = location.getLocType();
-            Log.d("Main","运行状态："+errorCode);
-            Log.d("Main","街道："+location.getBuildingID());
-            s_current_Et.setText(location.getAddrStr());
+            Log.d("SendSign","发送运行状态："+errorCode);
+            Log.d("SendSign","发送街道："+location.getBuildingID());
+            //s_current_Et.setText(location.getAddrStr());
 
             //将获取的location信息给百度map
             MyLocationData data = new MyLocationData.Builder()
