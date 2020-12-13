@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +24,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.locationattendance.data.Group;
 import com.example.locationattendance.data.GroupDao;
+import com.example.locationattendance.data.User;
+import com.example.locationattendance.data.UserConstants;
 import com.example.locationattendance.entity.TabEntity;
 import com.example.locationattendance.ui.main.SimpleCardFragment;
 import com.example.locationattendance.utils.ViewFindUtils;
@@ -43,10 +48,12 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+    public static Context mContext = null;
 
-    private static final String TAG = "GroupActivity";
+    private static final String TAG = "MainActivity";
     public String[] groupStrings = {"我创建的签到群", "我加入的签到群", "我管理的签到群"};
     public String[][] childStrings = {
             {"高等数学", "创新实践", "线性代数"},
@@ -67,27 +74,35 @@ public class MainActivity extends AppCompatActivity {
     private View mDecorView;
     private ViewPager viewPager;
     private CommonTabLayout mTabLayout;
-    Context mContext = this;
+
 
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.search_view)
-    SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext=getApplicationContext();
         //绑定butterknife
         ButterKnife.bind(this);
         //初始化状态栏
         initToolbar();
-        //初始化搜索栏
-        initSearch();
         //初始化viewpager
         initTabLayout();
+        User user = new User(1
+                ,"2332447236"
+                ,"钢铁侠"
+                ,"abc123"
+                ,"高龙"
+                ,"17337803324");
+        //这里先直接创建 然后存起来，一会用shareperfere
+        UserConstants.setCurrentUser(user);
+
     }
+
 
     /**
      * 初始化tablayout翻页
@@ -169,38 +184,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void showCreateDialog(){
-        View view = LayoutInflater.from(this).inflate(R.layout.create_group_dialog,null,false);
-        final AlertDialog dialog = new AlertDialog.Builder(this).setView(view).create();
-        EditText et_group_id = view.findViewById(R.id.et_group_id);
-        et_group_id.setText(getRandomString(8));//8位随机数字当作群号
-        EditText et_group_creator = view.findViewById(R.id.et_group_creator);
-        et_group_creator.setText("gaolong");//到时候用登录名
-        EditText et_group_name = view.findViewById(R.id.et_group_creator);
-        Button Bt_Create_Group = view.findViewById(R.id.bt_create_group);
-        Bt_Create_Group.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Group group = new Group();
-                group.setGroupName(et_group_name.getText().toString());
-                group.setGroupId(et_group_id.getText().toString());
-                group.setCreator(et_group_creator.getText().toString());
-                GroupDao dao = new GroupDao();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dao.addGroup(group);
-                        Looper.prepare();
-                        Toast.makeText(getApplicationContext(),"创建群聊成功",Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-                }).start();
-            }
-        });
-        dialog.show();
-        dialog.getWindow().setLayout((ScreenUtils.getScreenWidth(this)/4*3),LinearLayout.LayoutParams.WRAP_CONTENT);
-        //此处设置位置窗体大小，我这里设置为了手机屏幕宽度的3/4  注意一定要在show方法调用后再写设置窗口大小的代码，否则不起效果会
-    }
 
     /**
      * @param length 字符串长度
@@ -244,27 +227,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 初始化搜索栏
-     */
-    public void initSearch(){
-        searchView.setIconifiedByDefault(false);//搜索框是否自动收缩
-        searchView.setSubmitButtonEnabled(true);//是否显示搜索按钮
-        searchView.setQueryHint("签到群名称/群号");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(MainActivity.this, "你要查找"+s, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-
-                return false;
-            }
-        });
-    }
 
     /**
      * 把通知栏变透明

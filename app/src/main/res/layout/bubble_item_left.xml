@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/chatBack">
+    <ImageView
+        android:id="@+id/chat_item_head_left"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/user_head_icon_1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"/>
+
+    <com.github.library.bubbleview.BubbleTextView
+        android:id="@+id/bubbleView_text_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello BubbleTextVew
+        Hello BubbleTextVewHello BubbleTextVew
+        Hello BubbleTextVew"
+        android:padding="10dp"
+        android:textColor="#000000"
+        app:arrowWidth="8dp"
+        app:angle="8dp"
+        app:arrowHeight="10dp"
+        app:arrowPosition="14dp"
+        app:arrowLocation="left"
+        app:arrowCenter="false"
+        app:bubbleColor="#7EC0EE"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        />
+</LinearLayout>

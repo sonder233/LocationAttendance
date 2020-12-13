@@ -21,5 +21,7 @@
 
     <color name="RedTab">#A60C0C</color>
     <color name="RedToolbar">#D5373C</color>
+    
+    <color name="chatBack">#E8E8E8</color>
 
 </resources>

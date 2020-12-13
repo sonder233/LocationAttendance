@@ -1,2 +1,5 @@
+include ':maptest'
+include ':Service'
+include ':MyService'
 include ':app'
 rootProject.name = "LocationAttendance"

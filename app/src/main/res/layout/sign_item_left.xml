@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/chatBack"
+    android:id="@+id/sign_left">
+    <ImageView
+        android:id="@+id/chat_item_head_left"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/user_head_icon_1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"/>
+
+    <com.github.library.bubbleview.BubbleLinearLayout
+        android:layout_width="280dp"
+        android:layout_height="230dp"
+        android:orientation="vertical"
+        app:bubbleColor="#ffffff"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="签到"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#FF9945"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我发起了签到，请点击签到"
+            android:layout_marginLeft="20dp"/>
+        <ImageView
+            android:id="@+id/map_iv_left"
+            android:layout_width="250dp"
+            android:layout_height="146dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/map"
+            />
+
+    </com.github.library.bubbleview.BubbleLinearLayout>
+</LinearLayout>
